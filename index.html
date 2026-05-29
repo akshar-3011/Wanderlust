@@ -33,23 +33,129 @@
     <section class="hero" id="home">
         <div class="hero-bg" style="background-image: url('images/hero.png')"></div>
         <div class="hero-content fade-up">
-            <div class="hero-badge">🌍 Trusted by 50,000+ Travelers</div>
+            <div class="hero-badge">✈ Curated Travel Recommendations</div>
             <h1>Discover the World's Most Breathtaking Destinations</h1>
-            <p>From pristine beaches to ancient temples and vibrant countries — find your perfect escape with our expertly curated travel recommendations.</p>
+            <p>From pristine beaches to ancient temples and vibrant countries — find your perfect escape with our expertly curated travel guide.</p>
             <div class="hero-search">
                 <input type="text" id="heroSearch" placeholder="Search beaches, temples, countries..." aria-label="Search destinations">
                 <button type="button" id="heroSearchBtn">Search</button>
-            </div>
-            <div class="hero-stats">
-                <div class="stat"><span class="stat-number">150+</span><span class="stat-label">Destinations</span></div>
-                <div class="stat"><span class="stat-number">50K+</span><span class="stat-label">Happy Travelers</span></div>
-                <div class="stat"><span class="stat-number">4.9</span><span class="stat-label">Avg Rating</span></div>
             </div>
         </div>
     </section>
 
     <!-- Main Content -->
     <main>
+
+        <!-- Travel Matcher Quiz -->
+        <section class="section section-alt" id="quizSection">
+            <div class="container">
+                <div class="section-header fade-up">
+                    <span class="section-badge">🎯 Recommendation Engine</span>
+                    <h2>Find Your Perfect Escape</h2>
+                    <p>Answer a few quick questions and let our algorithm match you with the ideal destination for your next trip.</p>
+                </div>
+                <div class="quiz-container fade-up" id="quizContainer">
+                    <!-- Step 1: Vibe -->
+                    <div class="quiz-step active" id="step1">
+                        <h3>1. What kind of vibe are you looking for?</h3>
+                        <div class="quiz-options">
+                            <label class="quiz-option-card">
+                                <input type="radio" name="quizVibe" value="beach" checked>
+                                <span class="option-content">
+                                    <span class="option-icon">🏖</span>
+                                    <span class="option-title">Sun & Sea</span>
+                                    <span class="option-desc">Relaxing beaches, turquoise waters, and coastal warmth.</span>
+                                </span>
+                            </label>
+                            <label class="quiz-option-card">
+                                <input type="radio" name="quizVibe" value="temple">
+                                <span class="option-content">
+                                    <span class="option-icon">🛕</span>
+                                    <span class="option-title">History & Spirit</span>
+                                    <span class="option-desc">Ancient temples, rich cultures, and sacred structures.</span>
+                                </span>
+                            </label>
+                            <label class="quiz-option-card">
+                                <input type="radio" name="quizVibe" value="country">
+                                <span class="option-content">
+                                    <span class="option-icon">🌍</span>
+                                    <span class="option-title">Scenic & Culture</span>
+                                    <span class="option-desc">Vibrant cities, local cuisines, and iconic landscapes.</span>
+                                </span>
+                            </label>
+                        </div>
+                        <div class="quiz-nav">
+                            <button type="button" class="btn-explore next-step-btn" id="goToStep2">Next Question →</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Pace -->
+                    <div class="quiz-step" id="step2">
+                        <h3>2. What is your preferred travel pace?</h3>
+                        <div class="quiz-options">
+                            <label class="quiz-option-card">
+                                <input type="radio" name="quizPace" value="relaxed" checked>
+                                <span class="option-content">
+                                    <span class="option-icon">🧘</span>
+                                    <span class="option-title">Relaxed & Leisure</span>
+                                    <span class="option-desc">Secluded retreats, scenic train journeys, and slow exploration.</span>
+                                </span>
+                            </label>
+                            <label class="quiz-option-card">
+                                <input type="radio" name="quizPace" value="active">
+                                <span class="option-content">
+                                    <span class="option-icon">🚶</span>
+                                    <span class="option-title">Active & Exploratory</span>
+                                    <span class="option-desc">Adventure trails, hiking, walking tours, and bustling sights.</span>
+                                </span>
+                            </label>
+                        </div>
+                        <div class="quiz-nav">
+                            <button type="button" class="btn-secondary prev-step-btn" id="backToStep1">← Back</button>
+                            <button type="button" class="btn-explore submit-quiz-btn" id="submitQuiz">Find My Match</button>
+                        </div>
+                    </div>
+
+                    <!-- Result Step -->
+                    <div class="quiz-step" id="quizResult">
+                        <div class="quiz-result-card">
+                            <div class="result-badge">✨ Your Perfect Match</div>
+                            <h3 id="resultName">Destination Name</h3>
+                            <div class="result-content">
+                                <div class="result-image-wrapper">
+                                    <img id="resultImage" src="images/beach-maldives.png" alt="Your travel match">
+                                </div>
+                                <div class="result-details">
+                                    <p id="resultText">Recommended travel description text goes here.</p>
+                                    <div class="result-meta">
+                                        <span id="resultSeason">Best Season: Nov–Apr</span>
+                                        <span id="resultLocation">📍 Maldives</span>
+                                    </div>
+                                    <div class="result-actions">
+                                        <button type="button" class="btn-explore" id="viewResultDetails">Explore Destination</button>
+                                        <button type="button" class="btn-secondary" id="restartQuiz">Retake Quiz</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category Filters -->
+        <section class="section-filters" id="explore">
+            <div class="container">
+                <div class="filter-tabs-container fade-up">
+                    <div class="filter-tabs" id="filterTabs">
+                        <button type="button" class="filter-btn active" data-filter="all">Show All</button>
+                        <button type="button" class="filter-btn" data-filter="beach">🏖 Beaches</button>
+                        <button type="button" class="filter-btn" data-filter="temple">🛕 Temples</button>
+                        <button type="button" class="filter-btn" data-filter="country">🌍 Countries</button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Beach Recommendations -->
         <section class="section" id="beaches">
@@ -61,7 +167,7 @@
                 </div>
                 <div class="card-grid" id="beachGrid">
                     <!-- Beach Card 1 -->
-                    <article class="dest-card fade-up" data-category="beach" data-name="Maldives Overwater Paradise">
+                    <article class="dest-card fade-up" data-category="beach" data-name="Maldives Overwater Paradise" data-id="maldives">
                         <div class="card-image">
                             <img src="images/beach-maldives.png" alt="Overwater bungalows on crystal-clear turquoise lagoon in the Maldives" loading="lazy">
                             <span class="card-badge">🏖 Beach</span>
@@ -72,13 +178,16 @@
                             <span class="card-location">📍 South Malé Atoll, Maldives</span>
                             <p>Experience ultimate luxury in private overwater villas surrounded by pristine turquoise lagoons. Snorkel with manta rays, dine on the beach under the stars, and wake up to panoramic ocean views.</p>
                             <div class="card-footer-info">
-                                <span class="card-price">$2,400 <span>/ person</span></span>
-                                <a href="#" class="btn-explore" role="button">Explore →</a>
+                                <div class="card-meta-details">
+                                    <span class="meta-item">☀️ Nov–Apr</span>
+                                    <span class="meta-item">🧘 Relaxed</span>
+                                </div>
+                                <button type="button" class="btn-explore open-modal-btn" data-destination="maldives">Explore →</button>
                             </div>
                         </div>
                     </article>
                     <!-- Beach Card 2 -->
-                    <article class="dest-card fade-up" data-category="beach" data-name="Bali Sunset Coast">
+                    <article class="dest-card fade-up" data-category="beach" data-name="Bali Sunset Coast" data-id="bali">
                         <div class="card-image">
                             <img src="images/beach-bali.png" alt="Dramatic Bali coastline at sunset with Tanah Lot temple silhouette" loading="lazy">
                             <span class="card-badge">🏖 Beach</span>
@@ -89,13 +198,16 @@
                             <span class="card-location">📍 Tanah Lot, Bali, Indonesia</span>
                             <p>Witness magical sunsets along Bali's dramatic rocky coastline. Explore ancient sea temples, ride world-class surf breaks, and discover hidden cliff-side infinity pools overlooking the Indian Ocean.</p>
                             <div class="card-footer-info">
-                                <span class="card-price">$1,200 <span>/ person</span></span>
-                                <a href="#" class="btn-explore" role="button">Explore →</a>
+                                <div class="card-meta-details">
+                                    <span class="meta-item">☀️ May–Sep</span>
+                                    <span class="meta-item">🚶 Active</span>
+                                </div>
+                                <button type="button" class="btn-explore open-modal-btn" data-destination="bali">Explore →</button>
                             </div>
                         </div>
                     </article>
                     <!-- Beach Card 3 -->
-                    <article class="dest-card fade-up" data-category="beach" data-name="Santorini Mediterranean Dream">
+                    <article class="dest-card fade-up" data-category="beach" data-name="Santorini Mediterranean Dream" data-id="santorini">
                         <div class="card-image">
                             <img src="images/beach-santorini.png" alt="White-washed buildings and blue domes of Santorini overlooking the Aegean Sea" loading="lazy">
                             <span class="card-badge">🏖 Beach</span>
@@ -106,8 +218,11 @@
                             <span class="card-location">📍 Oia, Santorini, Greece</span>
                             <p>Wander through iconic white-washed villages perched on volcanic cliffs above the deep blue Aegean Sea. Enjoy world-class cuisine, volcanic hot springs, and the most famous sunsets on Earth.</p>
                             <div class="card-footer-info">
-                                <span class="card-price">$1,800 <span>/ person</span></span>
-                                <a href="#" class="btn-explore" role="button">Explore →</a>
+                                <div class="card-meta-details">
+                                    <span class="meta-item">☀️ May–Oct</span>
+                                    <span class="meta-item">🧘 Relaxed</span>
+                                </div>
+                                <button type="button" class="btn-explore open-modal-btn" data-destination="santorini">Explore →</button>
                             </div>
                         </div>
                     </article>
@@ -125,7 +240,7 @@
                 </div>
                 <div class="card-grid" id="templeGrid">
                     <!-- Temple Card 1 -->
-                    <article class="dest-card fade-up" data-category="temple" data-name="Angkor Wat Sunrise Experience">
+                    <article class="dest-card fade-up" data-category="temple" data-name="Angkor Wat Sunrise Experience" data-id="angkor">
                         <div class="card-image">
                             <img src="images/temple-angkor.png" alt="Angkor Wat temple towers reflected in lotus pond at sunrise in Cambodia" loading="lazy">
                             <span class="card-badge">🛕 Temple</span>
@@ -136,13 +251,16 @@
                             <span class="card-location">📍 Siem Reap, Cambodia</span>
                             <p>Witness the iconic sunrise over the largest religious monument on Earth. Explore over 400 acres of intricate Khmer architecture, hidden jungle temples, and ancient bas-relief galleries depicting Hindu mythology.</p>
                             <div class="card-footer-info">
-                                <span class="card-price">$800 <span>/ person</span></span>
-                                <a href="#" class="btn-explore" role="button">Explore →</a>
+                                <div class="card-meta-details">
+                                    <span class="meta-item">☀️ Nov–Feb</span>
+                                    <span class="meta-item">🚶 Active</span>
+                                </div>
+                                <button type="button" class="btn-explore open-modal-btn" data-destination="angkor">Explore →</button>
                             </div>
                         </div>
                     </article>
                     <!-- Temple Card 2 -->
-                    <article class="dest-card fade-up" data-category="temple" data-name="Kyoto Shrine Trail">
+                    <article class="dest-card fade-up" data-category="temple" data-name="Kyoto Shrine Trail" data-id="kyoto">
                         <div class="card-image">
                             <img src="images/temple-kyoto.png" alt="Traditional torii gate at a Kyoto shrine surrounded by autumn maple leaves" loading="lazy">
                             <span class="card-badge">🛕 Temple</span>
@@ -153,8 +271,11 @@
                             <span class="card-location">📍 Kyoto, Japan</span>
                             <p>Walk through thousands of vermillion torii gates, meditate in centuries-old Zen gardens, and experience traditional tea ceremonies in Japan's ancient imperial capital of over 2,000 temples and shrines.</p>
                             <div class="card-footer-info">
-                                <span class="card-price">$1,500 <span>/ person</span></span>
-                                <a href="#" class="btn-explore" role="button">Explore →</a>
+                                <div class="card-meta-details">
+                                    <span class="meta-item">☀️ Oct–Nov</span>
+                                    <span class="meta-item">🧘 Relaxed</span>
+                                </div>
+                                <button type="button" class="btn-explore open-modal-btn" data-destination="kyoto">Explore →</button>
                             </div>
                         </div>
                     </article>
@@ -172,7 +293,7 @@
                 </div>
                 <div class="card-grid" id="countryGrid">
                     <!-- Country Card 1 -->
-                    <article class="dest-card fade-up" data-category="country" data-name="Romantic Paris France">
+                    <article class="dest-card fade-up" data-category="country" data-name="Romantic Paris France" data-id="paris">
                         <div class="card-image">
                             <img src="images/country-paris.png" alt="Eiffel Tower illuminated at twilight with Seine river reflections in Paris" loading="lazy">
                             <span class="card-badge">🌍 Country</span>
@@ -183,13 +304,16 @@
                             <span class="card-location">📍 Paris, France</span>
                             <p>Fall in love with the City of Light — stroll along the Seine at twilight, savor croissants in charming cafés, explore world-class museums like the Louvre, and watch the Eiffel Tower sparkle at night.</p>
                             <div class="card-footer-info">
-                                <span class="card-price">$2,100 <span>/ person</span></span>
-                                <a href="#" class="btn-explore" role="button">Explore →</a>
+                                <div class="card-meta-details">
+                                    <span class="meta-item">☀️ Apr–Jun</span>
+                                    <span class="meta-item">🚶 Active</span>
+                                </div>
+                                <button type="button" class="btn-explore open-modal-btn" data-destination="paris">Explore →</button>
                             </div>
                         </div>
                     </article>
                     <!-- Country Card 2 -->
-                    <article class="dest-card fade-up" data-category="country" data-name="Cherry Blossom Japan">
+                    <article class="dest-card fade-up" data-category="country" data-name="Cherry Blossom Japan" data-id="japan">
                         <div class="card-image">
                             <img src="images/country-japan.png" alt="Mount Fuji with cherry blossoms and traditional pagoda reflected in lake" loading="lazy">
                             <span class="card-badge">🌍 Country</span>
@@ -200,13 +324,16 @@
                             <span class="card-location">📍 Tokyo & Kyoto, Japan</span>
                             <p>Experience the magic of sakura season beneath Mount Fuji, explore neon-lit Tokyo streets, master the art of sushi, ride bullet trains through stunning landscapes, and soak in natural hot springs.</p>
                             <div class="card-footer-info">
-                                <span class="card-price">$2,800 <span>/ person</span></span>
-                                <a href="#" class="btn-explore" role="button">Explore →</a>
+                                <div class="card-meta-details">
+                                    <span class="meta-item">☀️ Mar–May</span>
+                                    <span class="meta-item">🚶 Active</span>
+                                </div>
+                                <button type="button" class="btn-explore open-modal-btn" data-destination="japan">Explore →</button>
                             </div>
                         </div>
                     </article>
                     <!-- Country Card 3 -->
-                    <article class="dest-card fade-up" data-category="country" data-name="Alpine Switzerland">
+                    <article class="dest-card fade-up" data-category="country" data-name="Alpine Switzerland" data-id="switzerland">
                         <div class="card-image">
                             <img src="images/country-switzerland.png" alt="Swiss Alps village with snow-capped peaks and crystal-clear mountain lake" loading="lazy">
                             <span class="card-badge">🌍 Country</span>
@@ -217,48 +344,14 @@
                             <span class="card-location">📍 Interlaken, Switzerland</span>
                             <p>Breathe in crisp alpine air surrounded by snow-capped peaks, ride scenic mountain railways, explore charming villages, indulge in world-famous chocolate, and hike through flower-filled meadows.</p>
                             <div class="card-footer-info">
-                                <span class="card-price">$3,200 <span>/ person</span></span>
-                                <a href="#" class="btn-explore" role="button">Explore →</a>
+                                <div class="card-meta-details">
+                                    <span class="meta-item">☀️ Jun–Aug</span>
+                                    <span class="meta-item">🧘 Relaxed</span>
+                                </div>
+                                <button type="button" class="btn-explore open-modal-btn" data-destination="switzerland">Explore →</button>
                             </div>
                         </div>
                     </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- Testimonials -->
-        <section class="section section-alt" id="testimonials">
-            <div class="container">
-                <div class="section-header fade-up">
-                    <span class="section-badge">💬 Traveler Stories</span>
-                    <h2>What Our Travelers Say</h2>
-                    <p>Real experiences from adventurers who discovered their dream destinations with us.</p>
-                </div>
-                <div class="testimonials-grid">
-                    <div class="testimonial-card fade-up">
-                        <div class="quote">"</div>
-                        <p>The Maldives trip exceeded all expectations. The overwater villa was a dream, and the snorkeling was incredible. Wanderlust made every detail perfect!</p>
-                        <div class="testimonial-author">
-                            <div class="testimonial-avatar">SP</div>
-                            <div><div class="testimonial-name">Sarah P.</div><div class="testimonial-trip">Maldives, 2025</div></div>
-                        </div>
-                    </div>
-                    <div class="testimonial-card fade-up">
-                        <div class="quote">"</div>
-                        <p>Watching the sunrise at Angkor Wat was a life-changing moment. The cultural depth and history of Cambodia left us speechless. Highly recommend!</p>
-                        <div class="testimonial-author">
-                            <div class="testimonial-avatar">MK</div>
-                            <div><div class="testimonial-name">Michael K.</div><div class="testimonial-trip">Cambodia, 2025</div></div>
-                        </div>
-                    </div>
-                    <div class="testimonial-card fade-up">
-                        <div class="quote">"</div>
-                        <p>Japan during cherry blossom season is pure magic. From Tokyo's energy to Kyoto's serenity, every day was a new adventure. Can't wait to go back!</p>
-                        <div class="testimonial-author">
-                            <div class="testimonial-avatar">EL</div>
-                            <div><div class="testimonial-name">Emma L.</div><div class="testimonial-trip">Japan, 2024</div></div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -267,7 +360,7 @@
         <section class="cta-section" id="newsletter">
             <div class="container fade-up">
                 <h2>Ready for Your Next Adventure?</h2>
-                <p>Subscribe to get exclusive travel deals, insider tips, and destination guides straight to your inbox.</p>
+                <p>Subscribe to get exclusive destination guides, insider tips, and curated travel updates straight to your inbox.</p>
                 <form class="cta-form" id="newsletterForm" aria-label="Newsletter signup">
                     <input type="email" placeholder="Enter your email..." aria-label="Email for newsletter" required>
                     <button type="submit">Subscribe</button>
@@ -304,9 +397,9 @@
                 <div>
                     <h4>Follow Us</h4>
                     <ul>
-                        <li><a href="#">Instagram</a></li>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">Facebook</a></li>
+                        <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
+                        <li><a href="https://twitter.com" target="_blank" rel="noopener">Twitter</a></li>
+                        <li><a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a></li>
                     </ul>
                 </div>
             </div>
@@ -316,6 +409,69 @@
             </div>
         </div>
     </footer>
+
+    <!-- Destination Details Modal -->
+    <div class="modal-overlay" id="destinationModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-container">
+            <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">&times;</button>
+            <div class="modal-body">
+                <div class="modal-image-wrapper">
+                    <img id="modalImage" src="" alt="Destination Image">
+                    <span class="modal-badge" id="modalBadge">🏖 Beach</span>
+                </div>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 id="modalTitle">Destination Name</h2>
+                        <span class="modal-location" id="modalLocation">📍 Location</span>
+                    </div>
+                    <div class="modal-details-grid">
+                        <div class="modal-detail-item">
+                            <span class="detail-icon">📅</span>
+                            <div>
+                                <strong>Best Season</strong>
+                                <p id="modalSeason">Season details</p>
+                            </div>
+                        </div>
+                        <div class="modal-detail-item">
+                            <span class="detail-icon">💬</span>
+                            <div>
+                                <strong>Language</strong>
+                                <p id="modalLanguage">Language details</p>
+                            </div>
+                        </div>
+                        <div class="modal-detail-item">
+                            <span class="detail-icon">💳</span>
+                            <div>
+                                <strong>Currency</strong>
+                                <p id="modalCurrency">Currency details</p>
+                            </div>
+                        </div>
+                        <div class="modal-detail-item">
+                            <span class="detail-icon">🛂</span>
+                            <div>
+                                <strong>Entry Visa</strong>
+                                <p id="modalVisa">Visa requirements</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-description-section">
+                        <h3>About the Destination</h3>
+                        <p id="modalDescription">Detailed description goes here...</p>
+                    </div>
+                    <div class="modal-attractions-section">
+                        <h3>Key Attractions & Activities</h3>
+                        <ul id="modalAttractions">
+                            <li>Attraction 1</li>
+                        </ul>
+                    </div>
+                    <div class="modal-tips-section">
+                        <h3>Traveler Tips</h3>
+                        <p id="modalTips">Insider tips...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
