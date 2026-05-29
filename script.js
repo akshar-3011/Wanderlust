@@ -1,105 +1,239 @@
-const buttons = document.querySelectorAll('.nav-but');
-const newsGrid = document.getElementById('news-grid');
-const loading = document.getElementById('loading');
-const error = document.getElementById('error');
-const searchInput = document.getElementById('searchInput');
-const logo = document.querySelector('.logo');
-
-let currentCategory = 'general';
+/* ============================================
+   WANDERLUST TRAVEL — JavaScript Interactions
+   ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
+    initNavigation();
+    initScrollAnimations();
+    initSearch();
+    initContactForm();
+    initNewsletter();
+});
 
-    buttons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            buttons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            currentCategory = btn.dataset.category;
-            fetchNews(currentCategory);
+/* ----- NAVIGATION ----- */
+
+function initNavigation() {
+    const header = document.getElementById('header');
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+
+    // Scroll-based header styling (only on pages with hero)
+    if (header && !header.classList.contains('scrolled')) {
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 60);
+        }, { passive: true });
+    }
+
+    // Hamburger toggle
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', isOpen);
+        });
+
+        // Close menu when a link is clicked
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // Close menu on outside click
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+}
+
+/* ----- SCROLL ANIMATIONS (IntersectionObserver) ----- */
+
+function initScrollAnimations() {
+    const elements = document.querySelectorAll('.fade-up');
+    if (!elements.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                // Staggered delay for sibling elements
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, i * 100);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    elements.forEach(el => observer.observe(el));
+}
+
+/* ----- SEARCH & FILTER ----- */
+
+function initSearch() {
+    const heroSearch = document.getElementById('heroSearch');
+    const heroSearchBtn = document.getElementById('heroSearchBtn');
+    if (!heroSearch) return;
+
+    const filterCards = () => {
+        const query = heroSearch.value.toLowerCase().trim();
+        const cards = document.querySelectorAll('.dest-card');
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+            const name = (card.dataset.name || '').toLowerCase();
+            const category = (card.dataset.category || '').toLowerCase();
+            const text = card.textContent.toLowerCase();
+            const match = !query || name.includes(query) || category.includes(query) || text.includes(query);
+
+            card.style.display = match ? 'flex' : 'none';
+            card.style.opacity = match ? '1' : '0';
+            if (match) visibleCount++;
+        });
+
+        // Show/hide section headers based on visible cards
+        document.querySelectorAll('.card-grid').forEach(grid => {
+            const section = grid.closest('.section');
+            const visibleCards = grid.querySelectorAll('.dest-card[style*="display: flex"], .dest-card:not([style*="display"])');
+            let hasVisible = false;
+            visibleCards.forEach(c => {
+                if (c.style.display !== 'none') hasVisible = true;
+            });
+        });
+    };
+
+    // Debounced search
+    let searchTimeout;
+    heroSearch.addEventListener('input', () => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(filterCards, 250);
+    });
+
+    if (heroSearchBtn) {
+        heroSearchBtn.addEventListener('click', filterCards);
+    }
+
+    // Enter key
+    heroSearch.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            filterCards();
+            // Scroll to first results section
+            const firstSection = document.getElementById('beaches');
+            if (firstSection) {
+                firstSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+    });
+}
+
+/* ----- CONTACT FORM VALIDATION ----- */
+
+function initContactForm() {
+    const form = document.getElementById('contactForm');
+    if (!form) return;
+
+    const formContent = document.getElementById('formContent');
+    const formSuccess = document.getElementById('formSuccess');
+    const sendAnother = document.getElementById('sendAnother');
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Validate all fields
+        const name = document.getElementById('contactName');
+        const email = document.getElementById('contactEmail');
+        const subject = document.getElementById('contactSubject');
+        const message = document.getElementById('contactMessage');
+
+        let isValid = true;
+
+        // Name validation
+        if (!name.value.trim()) {
+            name.classList.add('error');
+            isValid = false;
+        } else {
+            name.classList.remove('error');
+        }
+
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email.value.trim() || !emailRegex.test(email.value.trim())) {
+            email.classList.add('error');
+            isValid = false;
+        } else {
+            email.classList.remove('error');
+        }
+
+        // Subject validation
+        if (!subject.value) {
+            subject.classList.add('error');
+            isValid = false;
+        } else {
+            subject.classList.remove('error');
+        }
+
+        // Message validation
+        if (!message.value.trim()) {
+            message.classList.add('error');
+            isValid = false;
+        } else {
+            message.classList.remove('error');
+        }
+
+        if (isValid) {
+            // Show success
+            formContent.style.display = 'none';
+            formSuccess.classList.add('show');
+        }
+    });
+
+    // Remove error on input
+    form.querySelectorAll('input, textarea, select').forEach(field => {
+        field.addEventListener('input', () => {
+            field.classList.remove('error');
+        });
+        field.addEventListener('change', () => {
+            field.classList.remove('error');
         });
     });
 
-    if (logo) {
-        logo.addEventListener('click', () => location.reload());
+    // Send another message
+    if (sendAnother) {
+        sendAnother.addEventListener('click', () => {
+            form.reset();
+            formContent.style.display = 'block';
+            formSuccess.classList.remove('show');
+        });
     }
+}
 
-    if (searchInput) {
-        searchInput.addEventListener('input', filterNews);
-    }
+/* ----- NEWSLETTER ----- */
 
-    fetchNews(currentCategory);
-});
+function initNewsletter() {
+    const form = document.getElementById('newsletterForm');
+    if (!form) return;
 
-async function fetchNews(category) {
-    loading.style.display = 'block';
-    error.style.display = 'none';
-    newsGrid.innerHTML = '';
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const input = form.querySelector('input[type="email"]');
+        const btn = form.querySelector('button');
 
-    try {
-        const response = await fetch(`/api/news?category=${category}`);
+        if (input && input.value.trim()) {
+            const originalText = btn.textContent;
+            btn.textContent = '✓ Subscribed!';
+            btn.style.background = '#27ae60';
+            input.value = '';
 
-
-        if (!response.ok) throw new Error('Network error');
-
-        const data = await response.json();
-
-        if (!data.articles || data.articles.length === 0) {
-            throw new Error('No news found');
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = '';
+            }, 3000);
         }
-
-        displayNews(data.articles);
-
-    } catch (err) {
-        console.error(err);
-        error.style.display = 'block';
-    } finally {
-        loading.style.display = 'none';
-    }
-}
-
-function displayNews(articles) {
-    articles.forEach(article => {
-        const card = document.createElement('div');
-        card.className = 'card';
-
-        const img = document.createElement('img');
-        img.src = article.urlToImage || 'https://via.placeholder.com/400x200';
-        img.onerror = () => img.src = 'https://via.placeholder.com/400x200';
-
-        const body = document.createElement('div');
-        body.className = 'card-body';
-        body.innerHTML = `
-            <h3>${article.title || 'No title available'}</h3>
-            <p>${article.description || 'No description available'}</p>
-            <a href="${article.url}" target="_blank" class="read-more">Read More</a>
-        `;
-
-        const footer = document.createElement('div');
-        footer.className = 'card-footer';
-        footer.innerHTML = `
-            <span class="source">${article.source?.name || 'Unknown'}</span>
-            <span>${formatDate(article.publishedAt)}</span>
-        `;
-
-        card.append(img, body, footer);
-        newsGrid.appendChild(card);
-    });
-}
-
-function filterNews() {
-    const query = searchInput.value.toLowerCase();
-    const cards = document.querySelectorAll('.card');
-
-    cards.forEach(card => {
-        const title = card.querySelector('h3').innerText.toLowerCase();
-        card.style.display = title.includes(query) ? 'flex' : 'none';
-    });
-}
-
-function formatDate(dateStr) {
-    if (!dateStr) return 'Date unavailable';
-    return new Date(dateStr).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
     });
 }

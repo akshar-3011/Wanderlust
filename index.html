@@ -1,65 +1,322 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News Aggregator</title>
+    <meta name="description" content="Wanderlust Travel — Discover breathtaking beaches, ancient temples, and vibrant countries. Your premium travel recommendation guide.">
+    <meta property="og:title" content="Wanderlust Travel — Discover Your Next Adventure">
+    <meta property="og:description" content="Explore curated travel recommendations for beaches, temples, and countries worldwide.">
+    <meta property="og:type" content="website">
+    <title>Wanderlust Travel — Discover Your Next Adventure</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <header class="header">
+    <!-- Header -->
+    <header class="header" id="header">
         <div class="container header-content">
-            <a href="" class="logo">
-                News<span>Aggregator</span>
+            <a href="index.html" class="logo" aria-label="Wanderlust Travel Home">
+                <span class="logo-icon">✈</span> Wander<span>lust</span>
             </a>
-
-
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Search news...">
-            </div>
+            <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+                <a href="index.html" class="active">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact Us</a>
+            </nav>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </header>
 
-    <nav class="nav">
-        <div class="container categories">
-            <button class="nav-but active" data-category="general">General</button>
-            <button class="nav-but" data-category="business">Business</button>
-            <button class="nav-but" data-category="technology">Technology</button>
-            <button class="nav-but" data-category="science">Science</button>
-            <button class="nav-but" data-category="sports">Sports</button>
-            <button class="nav-but" data-category="health">Health</button>
-            <button class="nav-but" data-category="entertainment">Entertainment</button>
-        </div>
-    </nav>
-
-
-    <main class="main">
-        <div class="container">
-
-            <div id="loading" class="loading">
-                <div class="spinner"></div>
-                <p>Loading news...</p>
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="hero-bg" style="background-image: url('images/hero.png')"></div>
+        <div class="hero-content fade-up">
+            <div class="hero-badge">🌍 Trusted by 50,000+ Travelers</div>
+            <h1>Discover the World's Most Breathtaking Destinations</h1>
+            <p>From pristine beaches to ancient temples and vibrant countries — find your perfect escape with our expertly curated travel recommendations.</p>
+            <div class="hero-search">
+                <input type="text" id="heroSearch" placeholder="Search beaches, temples, countries..." aria-label="Search destinations">
+                <button type="button" id="heroSearchBtn">Search</button>
             </div>
-
-            <div id="error" class="error">
-                Failed to load news. Please try again later.
+            <div class="hero-stats">
+                <div class="stat"><span class="stat-number">150+</span><span class="stat-label">Destinations</span></div>
+                <div class="stat"><span class="stat-number">50K+</span><span class="stat-label">Happy Travelers</span></div>
+                <div class="stat"><span class="stat-number">4.9</span><span class="stat-label">Avg Rating</span></div>
             </div>
-
-            <div id="news-grid" class="news-grid"></div>
-
         </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Beach Recommendations -->
+        <section class="section" id="beaches">
+            <div class="container">
+                <div class="section-header fade-up">
+                    <span class="section-badge">🏖 Beach Getaways</span>
+                    <h2>Paradise Beach Destinations</h2>
+                    <p>Escape to the world's most stunning coastlines with crystal-clear waters and golden sands.</p>
+                </div>
+                <div class="card-grid" id="beachGrid">
+                    <!-- Beach Card 1 -->
+                    <article class="dest-card fade-up" data-category="beach" data-name="Maldives Overwater Paradise">
+                        <div class="card-image">
+                            <img src="images/beach-maldives.png" alt="Overwater bungalows on crystal-clear turquoise lagoon in the Maldives" loading="lazy">
+                            <span class="card-badge">🏖 Beach</span>
+                            <span class="card-rating">⭐ 4.9</span>
+                        </div>
+                        <div class="card-body">
+                            <h3>Maldives Overwater Paradise</h3>
+                            <span class="card-location">📍 South Malé Atoll, Maldives</span>
+                            <p>Experience ultimate luxury in private overwater villas surrounded by pristine turquoise lagoons. Snorkel with manta rays, dine on the beach under the stars, and wake up to panoramic ocean views.</p>
+                            <div class="card-footer-info">
+                                <span class="card-price">$2,400 <span>/ person</span></span>
+                                <a href="#" class="btn-explore" role="button">Explore →</a>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- Beach Card 2 -->
+                    <article class="dest-card fade-up" data-category="beach" data-name="Bali Sunset Coast">
+                        <div class="card-image">
+                            <img src="images/beach-bali.png" alt="Dramatic Bali coastline at sunset with Tanah Lot temple silhouette" loading="lazy">
+                            <span class="card-badge">🏖 Beach</span>
+                            <span class="card-rating">⭐ 4.8</span>
+                        </div>
+                        <div class="card-body">
+                            <h3>Bali Sunset Coast</h3>
+                            <span class="card-location">📍 Tanah Lot, Bali, Indonesia</span>
+                            <p>Witness magical sunsets along Bali's dramatic rocky coastline. Explore ancient sea temples, ride world-class surf breaks, and discover hidden cliff-side infinity pools overlooking the Indian Ocean.</p>
+                            <div class="card-footer-info">
+                                <span class="card-price">$1,200 <span>/ person</span></span>
+                                <a href="#" class="btn-explore" role="button">Explore →</a>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- Beach Card 3 -->
+                    <article class="dest-card fade-up" data-category="beach" data-name="Santorini Mediterranean Dream">
+                        <div class="card-image">
+                            <img src="images/beach-santorini.png" alt="White-washed buildings and blue domes of Santorini overlooking the Aegean Sea" loading="lazy">
+                            <span class="card-badge">🏖 Beach</span>
+                            <span class="card-rating">⭐ 4.9</span>
+                        </div>
+                        <div class="card-body">
+                            <h3>Santorini Mediterranean Dream</h3>
+                            <span class="card-location">📍 Oia, Santorini, Greece</span>
+                            <p>Wander through iconic white-washed villages perched on volcanic cliffs above the deep blue Aegean Sea. Enjoy world-class cuisine, volcanic hot springs, and the most famous sunsets on Earth.</p>
+                            <div class="card-footer-info">
+                                <span class="card-price">$1,800 <span>/ person</span></span>
+                                <a href="#" class="btn-explore" role="button">Explore →</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Temple Recommendations -->
+        <section class="section section-alt" id="temples">
+            <div class="container">
+                <div class="section-header fade-up">
+                    <span class="section-badge">🛕 Sacred Temples</span>
+                    <h2>Ancient Temples & Sacred Sites</h2>
+                    <p>Journey through time to explore the world's most magnificent temples and spiritual landmarks.</p>
+                </div>
+                <div class="card-grid" id="templeGrid">
+                    <!-- Temple Card 1 -->
+                    <article class="dest-card fade-up" data-category="temple" data-name="Angkor Wat Sunrise Experience">
+                        <div class="card-image">
+                            <img src="images/temple-angkor.png" alt="Angkor Wat temple towers reflected in lotus pond at sunrise in Cambodia" loading="lazy">
+                            <span class="card-badge">🛕 Temple</span>
+                            <span class="card-rating">⭐ 5.0</span>
+                        </div>
+                        <div class="card-body">
+                            <h3>Angkor Wat Sunrise Experience</h3>
+                            <span class="card-location">📍 Siem Reap, Cambodia</span>
+                            <p>Witness the iconic sunrise over the largest religious monument on Earth. Explore over 400 acres of intricate Khmer architecture, hidden jungle temples, and ancient bas-relief galleries depicting Hindu mythology.</p>
+                            <div class="card-footer-info">
+                                <span class="card-price">$800 <span>/ person</span></span>
+                                <a href="#" class="btn-explore" role="button">Explore →</a>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- Temple Card 2 -->
+                    <article class="dest-card fade-up" data-category="temple" data-name="Kyoto Shrine Trail">
+                        <div class="card-image">
+                            <img src="images/temple-kyoto.png" alt="Traditional torii gate at a Kyoto shrine surrounded by autumn maple leaves" loading="lazy">
+                            <span class="card-badge">🛕 Temple</span>
+                            <span class="card-rating">⭐ 4.8</span>
+                        </div>
+                        <div class="card-body">
+                            <h3>Kyoto Shrine Trail</h3>
+                            <span class="card-location">📍 Kyoto, Japan</span>
+                            <p>Walk through thousands of vermillion torii gates, meditate in centuries-old Zen gardens, and experience traditional tea ceremonies in Japan's ancient imperial capital of over 2,000 temples and shrines.</p>
+                            <div class="card-footer-info">
+                                <span class="card-price">$1,500 <span>/ person</span></span>
+                                <a href="#" class="btn-explore" role="button">Explore →</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Country Recommendations -->
+        <section class="section" id="countries">
+            <div class="container">
+                <div class="section-header fade-up">
+                    <span class="section-badge">🌍 Country Escapes</span>
+                    <h2>Explore Iconic Countries</h2>
+                    <p>Immerse yourself in diverse cultures, cuisines, and landscapes across the globe.</p>
+                </div>
+                <div class="card-grid" id="countryGrid">
+                    <!-- Country Card 1 -->
+                    <article class="dest-card fade-up" data-category="country" data-name="Romantic Paris France">
+                        <div class="card-image">
+                            <img src="images/country-paris.png" alt="Eiffel Tower illuminated at twilight with Seine river reflections in Paris" loading="lazy">
+                            <span class="card-badge">🌍 Country</span>
+                            <span class="card-rating">⭐ 4.9</span>
+                        </div>
+                        <div class="card-body">
+                            <h3>Romantic Paris, France</h3>
+                            <span class="card-location">📍 Paris, France</span>
+                            <p>Fall in love with the City of Light — stroll along the Seine at twilight, savor croissants in charming cafés, explore world-class museums like the Louvre, and watch the Eiffel Tower sparkle at night.</p>
+                            <div class="card-footer-info">
+                                <span class="card-price">$2,100 <span>/ person</span></span>
+                                <a href="#" class="btn-explore" role="button">Explore →</a>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- Country Card 2 -->
+                    <article class="dest-card fade-up" data-category="country" data-name="Cherry Blossom Japan">
+                        <div class="card-image">
+                            <img src="images/country-japan.png" alt="Mount Fuji with cherry blossoms and traditional pagoda reflected in lake" loading="lazy">
+                            <span class="card-badge">🌍 Country</span>
+                            <span class="card-rating">⭐ 4.9</span>
+                        </div>
+                        <div class="card-body">
+                            <h3>Cherry Blossom Japan</h3>
+                            <span class="card-location">📍 Tokyo & Kyoto, Japan</span>
+                            <p>Experience the magic of sakura season beneath Mount Fuji, explore neon-lit Tokyo streets, master the art of sushi, ride bullet trains through stunning landscapes, and soak in natural hot springs.</p>
+                            <div class="card-footer-info">
+                                <span class="card-price">$2,800 <span>/ person</span></span>
+                                <a href="#" class="btn-explore" role="button">Explore →</a>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- Country Card 3 -->
+                    <article class="dest-card fade-up" data-category="country" data-name="Alpine Switzerland">
+                        <div class="card-image">
+                            <img src="images/country-switzerland.png" alt="Swiss Alps village with snow-capped peaks and crystal-clear mountain lake" loading="lazy">
+                            <span class="card-badge">🌍 Country</span>
+                            <span class="card-rating">⭐ 4.8</span>
+                        </div>
+                        <div class="card-body">
+                            <h3>Alpine Switzerland</h3>
+                            <span class="card-location">📍 Interlaken, Switzerland</span>
+                            <p>Breathe in crisp alpine air surrounded by snow-capped peaks, ride scenic mountain railways, explore charming villages, indulge in world-famous chocolate, and hike through flower-filled meadows.</p>
+                            <div class="card-footer-info">
+                                <span class="card-price">$3,200 <span>/ person</span></span>
+                                <a href="#" class="btn-explore" role="button">Explore →</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="section section-alt" id="testimonials">
+            <div class="container">
+                <div class="section-header fade-up">
+                    <span class="section-badge">💬 Traveler Stories</span>
+                    <h2>What Our Travelers Say</h2>
+                    <p>Real experiences from adventurers who discovered their dream destinations with us.</p>
+                </div>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card fade-up">
+                        <div class="quote">"</div>
+                        <p>The Maldives trip exceeded all expectations. The overwater villa was a dream, and the snorkeling was incredible. Wanderlust made every detail perfect!</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">SP</div>
+                            <div><div class="testimonial-name">Sarah P.</div><div class="testimonial-trip">Maldives, 2025</div></div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card fade-up">
+                        <div class="quote">"</div>
+                        <p>Watching the sunrise at Angkor Wat was a life-changing moment. The cultural depth and history of Cambodia left us speechless. Highly recommend!</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">MK</div>
+                            <div><div class="testimonial-name">Michael K.</div><div class="testimonial-trip">Cambodia, 2025</div></div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card fade-up">
+                        <div class="quote">"</div>
+                        <p>Japan during cherry blossom season is pure magic. From Tokyo's energy to Kyoto's serenity, every day was a new adventure. Can't wait to go back!</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">EL</div>
+                            <div><div class="testimonial-name">Emma L.</div><div class="testimonial-trip">Japan, 2024</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA / Newsletter -->
+        <section class="cta-section" id="newsletter">
+            <div class="container fade-up">
+                <h2>Ready for Your Next Adventure?</h2>
+                <p>Subscribe to get exclusive travel deals, insider tips, and destination guides straight to your inbox.</p>
+                <form class="cta-form" id="newsletterForm" aria-label="Newsletter signup">
+                    <input type="email" placeholder="Enter your email..." aria-label="Email for newsletter" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </section>
+
     </main>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2026 News Aggregator. Powered by News API.</p>
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo"><span class="logo-icon">✈</span> Wander<span>lust</span></div>
+                    <p>Your trusted companion for discovering the world's most breathtaking destinations. Travel smarter, explore further.</p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Destinations</h4>
+                    <ul>
+                        <li><a href="#beaches">Beaches</a></li>
+                        <li><a href="#temples">Temples</a></li>
+                        <li><a href="#countries">Countries</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Follow Us</h4>
+                    <ul>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Facebook</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Wanderlust Travel. All rights reserved.</p>
+                <p>Made with ❤ for travelers</p>
+            </div>
         </div>
     </footer>
 
     <script src="script.js"></script>
 </body>
-
 </html>
